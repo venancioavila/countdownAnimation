@@ -1,5 +1,4 @@
 // Inspiration: https://dribbble.com/shots/2343572-Countdown-timer
-// 👉 Output of the code: https://twitter.com/mironcatalin/status/1321856493382238208
 
 import * as React from 'react';
 import {
@@ -10,17 +9,15 @@ import {
   Dimensions,
   Animated,
   TouchableOpacity,
-  FlatList,
-  Text,
   View,
   StyleSheet,
   Platform,
 } from 'react-native';
 const {width, height} = Dimensions.get('window');
 const colors = {
-  black: '#323F4E',
-  red: '#F76A6A',
-  text: '#ffffff',
+  black: '#E6E6E6',
+  brand: '#03A9FC',
+  text: '#062E42',
 };
 
 const timers = [...Array(13).keys()].map((i) => (i === 0 ? 1 : i * 5));
@@ -41,11 +38,13 @@ export default function App() {
       Animated.timing(buttonAnimation, {
         toValue: 1,
         duration: 300,
+        easing: Easing.linear,
         useNativeDriver: true,
       }),
       Animated.timing(timerAnimation, {
         toValue: 0,
         duration: 300,
+        easing: Easing.linear,
         useNativeDriver: true,
       }),
       Animated.parallel([
@@ -110,7 +109,7 @@ export default function App() {
           {
             height,
             width,
-            backgroundColor: colors.red,
+            backgroundColor: colors.brand,
             transform: [{translateY: timerAnimation}],
           },
         ]}></Animated.View>
@@ -190,7 +189,7 @@ export default function App() {
 
             const scale = scrollX.interpolate({
               inputRange,
-              outputRange: [0.7, 1, 0.7],
+              outputRange: [0.4, 1, 0.4],
             });
 
             return (
@@ -222,7 +221,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 80,
-    backgroundColor: colors.red,
+    backgroundColor: colors.brand,
   },
   text: {
     fontSize: ITEM_SIZE * 0.8,
